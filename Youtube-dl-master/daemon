@@ -1,0 +1,28 @@
+#!/bin/bash
+#Ci-dessus le nom de l'interpreteur utilise
+cd todl
+#Se place dans le dossier qui contient les URLs
+while true; do
+#Tant que la condition est true on execute la boucle
+	for f in *; do
+#Pour tout fichier f du dossier
+		liens=$(cat $HOME/todl/$f)
+#Stocke les liens dans une variable liens
+		for url in $liens; do
+#Pour chaque ligne
+			~/catchit $url
+#Execution du script de telechargement
+			if [ $? = 0 ]
+#Si le script s'execute correctement
+				then echo "$url OK" >> $HOME/musique/report
+#Dans le fichier report, donne le resultat OK si le dl a reussi
+			else echo "$url KO" >> $HOME/musique/report
+#Dans le fichier report, donne le resultat KO si le dl a echoue
+			fi
+		done
+		rm $f
+#Suppression du contenu du dossier todl
+	done
+	sleep 300
+#On le fait dormir pendant 5 minutes
+done

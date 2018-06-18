@@ -1,0 +1,9 @@
+#!/bin/bash
+#Ci-dessus le nom de l'interpreteur utilise
+#Creation d'un dossier /musique
+mkdir $HOME/musique 2> /dev/null
+#Si le dossier est deja cree, n'affiche pas le message d'erreur
+/usr/local/bin/youtube-dl -x -f best -o "~/musique/%(title)s.%(ext)s" $1
+#Le parametre -x permet de supprimer la video
+#Le parametre -f best permet de selectionner la meilleure qualite
+#Le parametre -o permet de selectionner le dossier dans lequel le fichier sera enregistre
